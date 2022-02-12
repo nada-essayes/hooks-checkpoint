@@ -37,19 +37,12 @@ function App() {
   const addMovies = (newMovies) => {
     setMovies(movies.concat(newMovies))
   }
-  const filterMovies = (movies) => {
-   movies.rate=Rating
-  }
-  const [Rating, setRating] = useState(0);
+  const [Rating, setRating] = useState(1);
   const [nameMovie, setNameMovie] = useState("");
-
-  const searchMovies = (nameMovie) => {
-    setNameMovie(nameMovie)
-  }
   return (
     <div className="App" >
-       <div> <MovieFilter rating={Rating} setRating={setRating} nameMovie={nameMovie} setNameMovie={setNameMovie} searchMovies={searchMovies}/></div> 
-      <div><MovieList movies={movies} addMovies={addMovies} filterMovies={filterMovies}/></div>
+        <MovieFilter rating={Rating} setRating={setRating}  setNameMovie={setNameMovie}/>
+      <MovieList movies={movies.filter((movie)=> movie.title.toLowerCase().includes(nameMovie.toLowerCase().trim()) && movie.rate >= Rating )} addMovies={addMovies}/>
      
     </div>
   );
